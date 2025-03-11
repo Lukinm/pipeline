@@ -1,0 +1,36 @@
+name: Static Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js (ou a stack que você está usando)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run static analysis
+        run: npm run lint  # Ajuste conforme sua stack
+
+      - name: Build static assets
+        run: npm run build  # Ajuste conforme sua stack
+
+      - name: Deploy (opcional)
+        run: |
+          # Exemplo de deploy
+          npm run deploy
